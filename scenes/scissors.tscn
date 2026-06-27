@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cjjax8hoyd3gm" path="res://scripts/rps_item.gd" id="1_o3ui7"]
 [ext_resource type="Texture2D" uid="uid://5rhkfya513yt" path="res://extras/paper_bomb_explosion.png" id="2_6hbjw"]
 [ext_resource type="Texture2D" uid="uid://crhijb4o07uti" path="res://extras/scissor smash 12fps.png" id="2_eubgc"]
-[ext_resource type="Texture2D" uid="uid://cmue0xun4nlm" path="res://extras/paper_bomb_idle.png" id="3_7s3oq"]
+[ext_resource type="Texture2D" uid="uid://6agdrfatqv6p" path="res://extras/idle paper bomb.png" id="3_7s3oq"]
 [ext_resource type="Texture2D" uid="uid://drhvmgoopf281" path="res://extras/scissor.png" id="3_ix4kx"]
 [ext_resource type="FontFile" uid="uid://pfg8ofwqc0xk" path="res://assets/fonts/Lalezar-Regular.ttf" id="4_t4qim"]
 [ext_resource type="Texture2D" uid="uid://b01tf0winw01n" path="res://extras/scissors_heal.png" id="5_ix4kx"]
@@ -100,45 +100,45 @@ region = Rect2(1016, 2025, 508, 405)
 atlas = ExtResource("2_6hbjw")
 region = Rect2(1524, 2025, 508, 405)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sviah"]
+atlas = ExtResource("3_7s3oq")
+region = Rect2(0, 0, 300, 359)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_d18gd"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(0, 0, 1440, 1080)
+region = Rect2(300, 0, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmrj5"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(1440, 0, 1440, 1080)
+region = Rect2(600, 0, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvrfy"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(2880, 0, 1440, 1080)
+region = Rect2(900, 0, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qdyre"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(4320, 0, 1440, 1080)
+region = Rect2(0, 359, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ibrs"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(5760, 0, 1440, 1080)
+region = Rect2(300, 359, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eiro3"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(0, 1080, 1440, 1080)
+region = Rect2(600, 359, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8d2n"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(1440, 1080, 1440, 1080)
+region = Rect2(900, 359, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8guw0"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(2880, 1080, 1440, 1080)
+region = Rect2(0, 718, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bpkj"]
 atlas = ExtResource("3_7s3oq")
-region = Rect2(4320, 1080, 1440, 1080)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kmnq2"]
-atlas = ExtResource("3_7s3oq")
-region = Rect2(5760, 1080, 1440, 1080)
+region = Rect2(300, 718, 300, 359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sgvkm"]
 atlas = ExtResource("2_eubgc")
@@ -374,6 +374,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sviah")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_d18gd")
 }, {
 "duration": 1.0,
@@ -399,9 +402,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5bpkj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kmnq2")
 }],
 "loop": true,
 "name": &"bomb_idle",
@@ -552,7 +552,7 @@ script = ExtResource("1_o3ui7")
 position = Vector2(1.1920929e-07, 8)
 scale = Vector2(0.37570417, 0.37570417)
 sprite_frames = SubResource("SpriteFrames_rmkyt")
-animation = &"bomb_explosion"
+animation = &"bomb_idle"
 autoplay = "idle"
 
 [node name="Multiplier" type="Label" parent="." unique_id=1844234753]
