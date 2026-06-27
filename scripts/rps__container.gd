@@ -15,9 +15,15 @@ const SPACING := 150.0
 var current_deck = []
 var new_deck = []
 var full_deck = []
-var rps = ['Rock','Paper','Scissors']
+var rps = ['Paper','Scissors']
 var free_space = 0 
 var items: Array = []
+var is_bomb = false
+var bomb_timer = 3
+var is_bombing = false
+var bomb_trigger = false
+var current_bomb
+
 func _ready() -> void:
 	add_to_placeholder(4)
 
@@ -54,6 +60,7 @@ func add_to_placeholder(choices):
 			chosen = rps.pick_random()
 			reapet += 1
 			print("repeat",reapet)
+			print("count",current_deck)
 		current_deck.append(chosen)
 		if chosen == 'Rock':
 			selected_scene =  ROCK.instantiate()
@@ -72,44 +79,76 @@ func add_to_placeholder(choices):
 
 
 func should_heal(type):
-	var similar_items = []
-	print(" type heal:", type)
-	similar_items = get_tree().get_nodes_in_group(type)
-	if similar_items.size() >= 2:
-		print("cuurent deck before:", current_deck)
-		while current_deck.has(type):
-			current_deck.erase(type)
-		#current_deck = current_deck.filter(func(item): return item[0] != type)
-		print("cuurent deck after:", current_deck)
-		
-		for item in similar_items :
-			item.play_break_animation()
-			#remove_type(type)
-			fill_free_space()
-		return true
-	else:
-		return false
+	if not is_bombing:
+		var similar_items = []
+		similar_items = get_tree().get_nodes_in_group(type)
+		if similar_items.size() >= 2:
+			while current_deck.has(type):
+				current_deck.erase(type)
+			for rps_item in similar_items :
+				rps_item.play_heal_animation()
+			return true
+		else:
+			return false
 	
-
-
 
 
 func remove_type(type_name: String):
 	var targets
 	var buff =[]
 	var potion
+	current_bomb  = get_tree().get_nodes_in_group("bomb")
+	if current_bomb:
+		print("boooomb:", current_bomb[0].type)
 	if type_name == "Rock":
 		targets = get_tree().get_nodes_in_group("Scissors")
 		while current_deck.has("Scissors"):
 			current_deck.erase("Scissors")
+		if current_bomb:
+			if current_bomb[0].type == "Scissors":
+				print("bomb triggered ",bomb_timer)
+				if bomb_timer == 2 or bomb_timer == 0:
+					current_deck.erase("bomb")
+					current_bomb[0].queue_free()
+					is_bomb = false
+				elif bomb_timer == 1:
+					current_deck.erase("bomb")
+					bomb_trigger = true
+					current_bomb[0].play_bomb_explode()
+					is_bomb = false
 	elif type_name == "Paper":
 		targets = get_tree().get_nodes_in_group("Rock")
 		while current_deck.has("Rock"):
 			current_deck.erase("Rock")
+		if current_bomb:
+			if current_bomb[0].type == "Rock":
+				print("bomb triggered ",bomb_timer)
+				if bomb_timer == 2 or bomb_timer == 0:
+					current_deck.erase("bomb")
+					current_bomb[0].queue_free()
+					is_bomb = false
+				elif bomb_timer == 1:
+					current_deck.erase("bomb")
+					bomb_trigger = true
+					current_bomb[0].play_bomb_explode()
+					is_bomb = false
 	elif type_name == "Scissors":
 		targets = get_tree().get_nodes_in_group("Paper")
 		while current_deck.has("Paper"):
 			current_deck.erase("Paper")
+		if current_bomb:
+			if current_bomb[0].type == "Paper":
+				print("bomb triggered ",bomb_timer)
+				if bomb_timer == 0 or bomb_timer == 2:
+					current_deck.erase("bomb")
+					current_bomb[0].queue_free()
+					is_bomb = false
+				elif bomb_timer == 1:
+					current_deck.erase("bomb")
+					bomb_trigger = true
+					current_bomb[0].play_bomb_explode()
+					is_bomb = false
+					
 	else:
 		print('cant catch')
 	if targets:
@@ -138,15 +177,56 @@ func get_debuff(type_name):
 		debuff = targets.size()
 	else:
 		debuff = 0
-	if debuff > 1:
-		bomb_planted(type_name)
 	return debuff
 
-func bomb_planted(type_name):
+func check_bombing(type_name):
+	
 	var targets
-	targets = get_tree().get_nodes_in_group(type_name)
-	print("targets: ",targets)
-	targets[0].play_bomb_idle()
+	var similar
+	var debuff = 0
+	if not is_bomb:
+		is_bombing = true
+		if type_name == "Rock":
+			targets = get_tree().get_nodes_in_group("Paper")
+			similar = get_tree().get_nodes_in_group("Rock")
+		elif type_name == "Paper":
+			targets = get_tree().get_nodes_in_group("Scissors")
+			similar = get_tree().get_nodes_in_group("Paper")
+		elif type_name == "Scissors":
+			targets = get_tree().get_nodes_in_group("Rock")
+			similar = get_tree().get_nodes_in_group("Scissors")
+			
+		if targets:
+			print("bomb target:", targets)
+			debuff = targets.size()
+		else:
+			debuff = 0
+		if debuff > 1 and similar.size()>0:
+			bomb_planted(type_name)
+			return true
+		else:
+			is_bombing = false
+			return false
+	else:
+		is_bombing = false
+		return false
+
+
+func bomb_planted(type_name: String):
+	if not is_bomb:
+		var targets
+		targets = get_tree().get_nodes_in_group(type_name)
+		if targets:
+			targets[0].play_bomb_idle()
+			is_bomb = true
+			bomb_timer = 3
+			current_deck.erase(type_name)
+			current_deck.append("bomb")
+
+func bomb_explode():
+	var bomb = get_tree().get_nodes_in_group("bomb")
+	bomb[0].play_bomb_explode()
+
 
 func wait_to_finish_animation(targets):
 	for node in targets:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5pu3ak1omo1f"
-path="res://.godot/imported/scissors_bomb_explosion.png-9a71a69de8622dd172023e9e433fa0af.ctex"
+uid="uid://b01tf0winw01n"
+path="res://.godot/imported/scissors_heal.png-172bd6886dbcd4f95f3a501c5a18ee83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://extras/scissors_bomb_explosion.png"
-dest_files=["res://.godot/imported/scissors_bomb_explosion.png-9a71a69de8622dd172023e9e433fa0af.ctex"]
+source_file="res://extras/scissors_heal.png"
+dest_files=["res://.godot/imported/scissors_heal.png-172bd6886dbcd4f95f3a501c5a18ee83.ctex"]
 
 [params]
 

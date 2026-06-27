@@ -23,6 +23,7 @@ var should_heal = false
 var pending_puzzles = [] 
 var current_board = ""
 var player_current_board = ""
+
 # =========================
 # Letter Textures
 # =========================
@@ -173,47 +174,73 @@ func play_popup_effect(label):
 
 func apply_word_effect(word: String, owner: String):
 	var damage = word.length() * 2
-	$WordDamage.text = str(damage)
+	$WordDamage.text = str(damage  * 2)
 	play_popup_effect($WordDamage)
 	await play_popup_effect($WordDamage)
 	$WordDamage.text = ""
 	is_game_running = false
-	if owner == "player":
-		should_heal = $RPSContainer.should_heal(player_current_board)
 
-		if should_heal:
+
+	if owner == "player":
+		var is_bombing = $RPSContainer.check_bombing(player_current_board) 
+		should_heal = $RPSContainer.should_heal(player_current_board)
+		if is_bombing:
+			print("bomb is planting")
+		elif should_heal:
 			player_hp += 6 + (damage/2)
 			if player_hp > max_hp:
 				player_hp = max_hp
 			play_popup_effect($PlayerHPDamage)
 			$PlayerHPDamage.text = "+" + str((6 + (damage/2)))
 			$PlayerHPDamage.modulate = Color(0.0, 0.536, 0.287, 1.0)
+			await get_tree().create_timer(4).timeout
+			$RPSContainer.fill_free_space()
+
 			update_hp_ui()
-		
-		$RPSContainer.remove_type(player_current_board)
-		for buff in range(0,multiplier):
-			await get_tree().create_timer(.5).timeout
-			$BotHPDamage.text = "-" + str(damage)
-			$BotHPDamage.modulate = Color(1, 0.3, 0.3)
-			play_popup_effect($BotHPDamage)
+		else:
+			$RPSContainer.remove_type(player_current_board)
+			var full_damage = 0
+			if $RPSContainer.bomb_trigger:
+				await get_tree().create_timer(.5).timeout
+				$BotHPDamage.text = "-" + str(6)
+				$BotHPDamage.modulate = Color(1, 0.3, 0.3)
+				play_popup_effect($BotHPDamage)
+				bot_hp -=  6
+				update_hp_ui()
+				full_damage += 6
+			for i in range(0,multiplier):
+				await get_tree().create_timer(.5).timeout
+				$BotHPDamage.text = "-" + str(damage)
+				$BotHPDamage.modulate = Color(1, 0.3, 0.3)
+				play_popup_effect($BotHPDamage)
+			
 			bot_hp -= damage
 			update_hp_ui()
-		await get_tree().create_timer(.5).timeout
-		$BotHPDamage.modulate = Color(0.0, 0.536, 0.287, 1.0)
-		debuff = $RPSContainer.get_debuff(player_current_board)
-		for i in range(0,debuff):
-			var calculated = .5 *  damage
-			bot_hp += calculated  
-			$BotHPDamage.text = "+" + str(calculated  )
-		play_popup_effect($BotHPDamage)
-		
-		update_hp_ui()
-		var bar = $BotHPBar
-		bar.modulate = Color(1, 0.3, 0.3)
-		create_tween().tween_property(bar, "modulate", Color(1,1,1), 0.4)
+			await get_tree().create_timer(.5).timeout
+			
+			debuff = $RPSContainer.get_debuff(player_current_board)
+			print("debuf array", debuff)
+			for i in range(0,debuff):
+				if full_damage - (.5 * damage)>0:
+					var calculated = .5 * damage
+					bot_hp += calculated  
+					$BotHPDamage.modulate = Color(0.0, 0.536, 0.287, 1.0)
+					$BotHPDamage.text = "+" + str(calculated)
+					
+			play_popup_effect($BotHPDamage)
+			
+			
+			update_hp_ui()
+			
+			var bar = $BotHPBar
+			bar.modulate = Color(1, 0.3, 0.3)
+			create_tween().tween_property(bar, "modulate", Color(1,1,1), 0.4)
 	else:
+		var is_bombing = $RPSContainer.check_bombing(current_board) 
 		should_heal = $RPSContainer.should_heal(current_board)
-		if should_heal:
+		if is_bombing:
+			print("bomb is planting")
+		elif should_heal:
 			bot_hp += 6 + (damage/2)
 			if bot_hp > max_hp:
 				bot_hp = max_hp
@@ -221,32 +248,51 @@ func apply_word_effect(word: String, owner: String):
 			$BotHPDamage.text = "+" + str((6 + (damage/2)))
 			$BotHPDamage.modulate = Color(0.0, 0.536, 0.287, 1.0)
 			play_popup_effect($BotHPDamage)
+			await get_tree().create_timer(4).timeout
+			
+			$RPSContainer.fill_free_space()
 			update_hp_ui()
-		$RPSContainer.remove_type(current_board)
-		for buff in range(0,multiplier):
+		else:
+			print("damage too")
+			$RPSContainer.remove_type(current_board)
+			var full_damage = 0
+			if $RPSContainer.bomb_trigger:
+				await get_tree().create_timer(.5).timeout
+				$BotHPDamage.text = "-" + str(6)
+				$BotHPDamage.modulate = Color(1, 0.3, 0.3)
+				play_popup_effect($BotHPDamage)
+				bot_hp -=  6
+				update_hp_ui()
+				full_damage += 6
+			for i in range(0,multiplier):
+				await get_tree().create_timer(.5).timeout
+				play_popup_effect($PlayerHPDamage)
+				$PlayerHPDamage.text = "-" + str(damage)
+				$PlayerHPDamage.modulate = Color(1, 0.3, 0.3)
+				player_hp -= damage
+				update_hp_ui()
+				full_damage += damage
 			await get_tree().create_timer(.5).timeout
-			play_popup_effect($PlayerHPDamage)
-			$PlayerHPDamage.text = "-" + str(damage)
-			$PlayerHPDamage.modulate = Color(1, 0.3, 0.3)
-			player_hp -=  damage
+			debuff = $RPSContainer.get_debuff(current_board)
+			
+			for i in range(0,debuff):
+				if full_damage - (.5 * damage)>0:
+					var calculated = .5 * damage
+					player_hp += calculated
+					$PlayerHPDamage.text = "+" + str(calculated)
+					$PlayerHPDamage.modulate = Color(0.0, 0.536, 0.287, 1.0)
+					play_popup_effect($PlayerHPDamage)
+					
+					
+					
 			update_hp_ui()
-		await get_tree().create_timer(.5).timeout
-		debuff = $RPSContainer.get_debuff(current_board)
-		
-		for i in range(0,debuff):
-			var calculated = .5 * damage
-			player_hp += calculated
-			$PlayerHPDamage.text = "+" + str(calculated)
-			$PlayerHPDamage.modulate = Color(0.0, 0.536, 0.287, 1.0)
-			play_popup_effect($PlayerHPDamage)
-				
-		update_hp_ui()
-		var bar = $"PlayerHPBar"
-		bar.modulate = Color(1, 0.3, 0.3)
-		create_tween().tween_property(bar, "modulate", Color(1,1,1), 0.4)
+			var bar = $"PlayerHPBar"
+			bar.modulate = Color(1, 0.3, 0.3)
+			create_tween().tween_property(bar, "modulate", Color(1,1,1), 0.4)
+	
 	multiplier = []
 	is_game_running = true
-	
+
 	update_hp_ui()
 	check_game_over()
 
@@ -283,7 +329,10 @@ func update_hp_ui():
 	create_tween().tween_property($BotHPBar, "value", bot_hp, 0.3)
 func _start_player_turn():
 	if game_finished: return
-
+	if $RPSContainer.is_bomb:
+		$RPSContainer.bomb_timer -= 1
+		print("bomb timer" , $RPSContainer.bomb_timer)
+		
 	$"puzzle container".input_enabled = true
 	current_word = ""
 	current_turn = "player"
@@ -324,6 +373,15 @@ func submit_current_word():
 		add_found_word(current_word,'player')
 
 		$"puzzle container".board_buff(player_current_board)
+		if $RPSContainer.bomb_timer <= 0:
+			print("bomb exploded")
+			$RPSContainer.current_bomb[0].play_bomb_explode()
+			await get_tree().create_timer(.5).timeout
+			$PlayerHPDamage.text = "-" + str(12)
+			$PlayerHPDamage.modulate = Color(1, 0.3, 0.3)
+			play_popup_effect($PlayerHPDamage)
+			player_hp -=  12
+			update_hp_ui()
 		_start_bot_turn()
 	else:
 		print("❌ غلط")
@@ -339,11 +397,14 @@ func _start_bot_turn():
 	#set_buttons_enabled(false)
 	print("current turn: ",current_turn)
 	reset_timer()
-
+	if $RPSContainer.is_bomb:
+		$RPSContainer.bomb_timer -= 1
+		print("bomb timer" , $RPSContainer.bomb_timer)
 	await perform_bot_move()
 	print("checking player turn")
 	if not game_finished:
 		print("player turn")
+		
 		_start_player_turn()
 	
 func perform_bot_move():
@@ -388,7 +449,15 @@ func perform_bot_move():
 				current_word_label.text = current_word
 				await get_tree().create_timer(0.5).timeout
 			found_words.append(chosen)
-
+			if $RPSContainer.bomb_timer <= 0:
+				print("bomb exploded")
+				$RPSContainer.current_bomb[0].play_bomb_explode()
+				await get_tree().create_timer(.5).timeout
+				$BotHPDamage.text = "-" + str(12)
+				$BotHPDamage.modulate = Color(1, 0.3, 0.3)
+				play_popup_effect($BotHPDamage)
+				bot_hp -=  12
+				update_hp_ui()
 			add_found_word(chosen, "bot")
 			update_score()
 			update_bot_score()
@@ -459,7 +528,8 @@ func turn_over():
 
 	elif current_turn == "bot":
 		_start_player_turn()
-		
+
+	
 #func _reset_puzzle():
 	#var new_puzzle = SocketManager.get_offline_test_puzzle()
 	#var try_count=0
