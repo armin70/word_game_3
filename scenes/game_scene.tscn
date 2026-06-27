@@ -1,0 +1,554 @@
+[gd_scene format=3 uid="uid://cy50wck4j8bek"]
+
+[ext_resource type="FontFile" uid="uid://pfg8ofwqc0xk" path="res://assets/fonts/Lalezar-Regular.ttf" id="1_bw6k5"]
+[ext_resource type="Script" uid="uid://x7mfbnrnfbym" path="res://scripts/puzzle.gd" id="1_kk2rg"]
+[ext_resource type="Texture2D" uid="uid://dj3e0pdwahjso" path="res://extras/wp12636086.png" id="2_b5spy"]
+[ext_resource type="FontFile" uid="uid://btclmw74tt5gn" path="res://assets/fonts/Vazirmatn-Medium.ttf" id="2_y3j0m"]
+[ext_resource type="Texture2D" uid="uid://dkwyfnt8kumjf" path="res://extras/bot.png" id="3_rurhu"]
+[ext_resource type="Texture2D" uid="uid://debyd24gcsufi" path="res://extras/version 0.1.4.png" id="3_tcjrq"]
+[ext_resource type="Texture2D" uid="uid://crpwasoqu3m6b" path="res://extras/player.png" id="4_kk2rg"]
+[ext_resource type="Texture2D" uid="uid://bpvsvy1ku6nl0" path="res://extras/but turn.png" id="6_tcjrq"]
+[ext_resource type="PackedScene" uid="uid://dj1j541bnpras" path="res://scenes/puzzle_container.tscn" id="8_b5spy"]
+[ext_resource type="PackedScene" uid="uid://ds8qtausq5e8i" path="res://scenes/rps__container.tscn" id="10_mw25s"]
+[ext_resource type="Texture2D" uid="uid://yfmikjcjqnkl" path="res://extras/your turn.png" id="10_tcjrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldkr4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
+bg_color = Color(0.8784314, 0.8862745, 0.88235295, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b5spy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wfyh"]
+font = ExtResource("1_bw6k5")
+font_size = 35
+font_color = Color(0.8784314, 0.8862745, 0.88235295, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mw25s"]
+font = ExtResource("1_bw6k5")
+font_size = 45
+font_color = Color(0.42745098, 1, 0.015686275, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jkv2x"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_muem4"]
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dp3eg"]
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jbj1t"]
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
+font = ExtResource("2_y3j0m")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kk2rg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6xl0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tipki"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 500
+corner_radius_top_right = 500
+corner_radius_bottom_right = 500
+corner_radius_bottom_left = 500
+
+[sub_resource type="LabelSettings" id="LabelSettings_85g3d"]
+font = ExtResource("1_bw6k5")
+font_size = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85g3d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_choun"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ya4ey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb6dy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_trceg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8y0u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_liy57"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
+bg_color = Color(0, 0.6117647, 0.99215686, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mwyo0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mw25s"]
+bg_color = Color(0.99215686, 0.63529414, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_tcjrq"]
+font = ExtResource("1_bw6k5")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_choun"]
+font = ExtResource("1_bw6k5")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ya4ey"]
+font = ExtResource("1_bw6k5")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_utbpp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mw25s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcjrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rvs2r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tqxxy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ay1a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kk2rg"]
+font = ExtResource("1_bw6k5")
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_utbpp"]
+font = ExtResource("1_bw6k5")
+font_size = 90
+font_color = Color(0, 0, 0, 1)
+
+[node name="game_scene" type="Control" unique_id=1224919347]
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kk2rg")
+
+[node name="EndGamePopup" type="Window" parent="." unique_id=1706601305]
+process_mode = 3
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(200, 200)
+visible = false
+exclusive = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndGamePopup" unique_id=106903490]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -46.5
+offset_right = 41.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResultLabel" type="Label" parent="EndGamePopup/VBoxContainer" unique_id=848380529]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="EndGamePopup/VBoxContainer" unique_id=1728168996]
+layout_mode = 2
+text = "شروع مجدد"
+
+[node name="ExitButton" type="Button" parent="EndGamePopup/VBoxContainer" unique_id=975625036]
+layout_mode = 2
+text = "خروج"
+
+[node name="NoirTheme" type="Sprite2D" parent="." unique_id=978554589]
+visible = false
+position = Vector2(364, 638)
+scale = Vector2(0.55930495, 0.4570724)
+texture = ExtResource("2_b5spy")
+
+[node name="Version0_1_3(icons)" type="Sprite2D" parent="." unique_id=2000542607]
+position = Vector2(363, 644)
+scale = Vector2(0.67426383, 0.67426383)
+texture = ExtResource("3_tcjrq")
+
+[node name="TimerBar" type="ProgressBar" parent="." unique_id=1627815628]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 25.0
+offset_right = 595.0
+offset_bottom = 82.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_ldkr4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ya4ey")
+max_value = 20.0
+value = 20.0
+show_percentage = false
+
+[node name="FoundWords" type="HFlowContainer" parent="." unique_id=1147281222]
+visible = false
+layout_direction = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1273891
+anchor_top = 0.034375
+anchor_right = 0.85138905
+anchor_bottom = 0.04537501
+offset_left = -0.00018310547
+offset_right = -0.00012207031
+offset_bottom = 150.0
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrentWordLabel" type="Label" parent="." unique_id=2111911172]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.015277778
+anchor_top = 0.00703125
+anchor_right = -0.015277778
+anchor_bottom = 0.03046875
+offset_left = 265.0
+offset_top = 660.0
+offset_right = 465.0
+offset_bottom = 686.0
+theme_override_colors/font_color = Color(0.8784314, 0.8862745, 0.88235295, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b5spy")
+label_settings = SubResource("LabelSettings_0wfyh")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="WordDamage" type="Label" parent="." unique_id=773923033]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 652.0
+offset_right = 277.0
+offset_bottom = 724.0
+label_settings = SubResource("LabelSettings_mw25s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FeedbackLabel" type="Label" parent="." unique_id=838785517]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4027778
+anchor_top = -0.0328125
+anchor_right = -1.4027778
+anchor_bottom = -0.0171875
+offset_left = 1088.0
+offset_top = 230.0
+offset_right = 1128.0
+offset_bottom = 253.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_jkv2x")
+metadata/_edit_use_anchors_ = true
+
+[node name="BotStatusLabel" type="Label" parent="." unique_id=965278250]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36527777
+anchor_top = 0.08203125
+anchor_right = 0.36527777
+anchor_bottom = 0.08203125
+offset_left = 100.0
+offset_top = 205.0
+offset_right = 140.0
+offset_bottom = 228.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_muem4")
+metadata/_edit_use_anchors_ = true
+
+[node name="BotScoreLabel" type="Label" parent="." unique_id=1508274150]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7097222
+anchor_top = 0.1625
+anchor_right = 0.7097222
+anchor_bottom = 0.1640625
+offset_left = 99.0
+offset_top = 170.0
+offset_right = 160.0
+offset_bottom = 193.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_dp3eg")
+text = "bot : 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=933071364]
+visible = false
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0178968, 0.9473651)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxTexture_jbj1t")
+text = "0"
+label_settings = SubResource("LabelSettings_sugp2")
+metadata/_edit_use_anchors_ = true
+
+[node name="SubmitButton" type="Button" parent="." unique_id=293878320]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76111114
+anchor_top = 0.5757812
+anchor_right = 0.76111114
+anchor_bottom = 0.5757812
+offset_top = -30.0
+offset_right = 60.0
+offset_bottom = 30.0
+grow_vertical = 0
+scale = Vector2(1.9501774, 1.9501774)
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kk2rg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_o6xl0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tipki")
+action_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="TimerLabel" type="Label" parent="." unique_id=654293002]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 32.0
+offset_right = 181.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
+text = "1"
+label_settings = SubResource("LabelSettings_85g3d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResetPuzzle" type="Button" parent="." unique_id=1504869934]
+visible = false
+layout_mode = 0
+offset_left = 75.0
+offset_top = 1152.0
+offset_right = 180.0
+offset_bottom = 1252.0
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxEmpty_85g3d")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_choun")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ya4ey")
+action_mode = 0
+
+[node name="shuffle" type="Button" parent="." unique_id=443786606]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 718.0
+offset_right = 172.0
+offset_bottom = 818.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eb6dy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_trceg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a8y0u")
+
+[node name="PlayerHPBar" type="ProgressBar" parent="." unique_id=1184940997]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 119.0
+offset_right = 678.0
+offset_bottom = 381.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_liy57")
+theme_override_styles/fill = SubResource("StyleBoxFlat_choun")
+max_value = 50.0
+value = 23.0
+fill_mode = 3
+show_percentage = false
+
+[node name="BotHPBar" type="ProgressBar" parent="." unique_id=1030644256]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 119.0
+offset_right = 348.0
+offset_bottom = 380.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_mwyo0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mw25s")
+max_value = 50.0
+value = 15.0
+fill_mode = 3
+show_percentage = false
+
+[node name="PlayerHPDamage" type="Label" parent="." unique_id=1072116773]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 148.0
+offset_right = 551.0
+offset_bottom = 212.0
+label_settings = SubResource("LabelSettings_tcjrq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotHPDamage" type="Label" parent="." unique_id=589719380]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 157.0
+offset_right = 206.0
+offset_bottom = 221.0
+label_settings = SubResource("LabelSettings_tcjrq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerHP" type="Label" parent="." unique_id=272950325]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 222.0
+offset_right = 538.0
+offset_bottom = 286.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+label_settings = SubResource("LabelSettings_choun")
+
+[node name="BotHP" type="Label" parent="." unique_id=1430181628]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 203.0
+offset_right = 212.0
+offset_bottom = 267.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+label_settings = SubResource("LabelSettings_ya4ey")
+
+[node name="bot_turn_indicator" type="Sprite2D" parent="." unique_id=230569204]
+visible = false
+position = Vector2(365.00003, 699)
+scale = Vector2(0.69224006, 0.69224)
+texture = ExtResource("6_tcjrq")
+
+[node name="turn_indicator" type="Sprite2D" parent="." unique_id=1154533848]
+visible = false
+position = Vector2(361.2, 700.25)
+scale = Vector2(0.67500013, 0.67500013)
+texture = ExtResource("10_tcjrq")
+
+[node name="Bot" type="Sprite2D" parent="." unique_id=1393963999]
+position = Vector2(79, 365)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_rurhu")
+
+[node name="Player" type="Sprite2D" parent="." unique_id=371571124]
+position = Vector2(433, 364)
+scale = Vector2(0.5222222, 0.5222222)
+texture = ExtResource("4_kk2rg")
+
+[node name="pause" type="TextureButton" parent="." unique_id=251782942]
+process_mode = 3
+layout_mode = 0
+offset_left = 20.0
+offset_top = -7.0
+offset_right = 170.0
+offset_bottom = 143.0
+scale = Vector2(0.67379785, 0.67379785)
+
+[node name="puzzle container" parent="." unique_id=75891022 instance=ExtResource("8_b5spy")]
+layout_mode = 0
+offset_left = 673.0
+offset_top = -3.0
+offset_right = 713.0
+offset_bottom = 37.0
+
+[node name="prevPuzzle" type="Button" parent="." unique_id=1781281136]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 944.0
+offset_right = 99.0
+offset_bottom = 1044.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_utbpp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mw25s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tcjrq")
+
+[node name="nextPuzzle" type="Button" parent="." unique_id=1378656902]
+layout_mode = 0
+offset_left = 630.0
+offset_top = 943.0
+offset_right = 730.0
+offset_bottom = 1043.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rvs2r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tqxxy")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ay1a")
+
+[node name="TotalTimerLabel" type="Label" parent="." unique_id=1826637056]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 1216.0
+offset_right = 86.66667
+offset_bottom = 1263.0
+text = "00:01"
+label_settings = SubResource("LabelSettings_kk2rg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RPSContainer" parent="." unique_id=917461322 instance=ExtResource("10_mw25s")]
+position = Vector2(124, 513)
+
+[node name="CountdownOverlay" type="ColorRect" parent="." unique_id=275972147]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.6627451)
+
+[node name="CenterContainer" type="CenterContainer" parent="CountdownOverlay" unique_id=668102168]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CountdownLabel" type="Label" parent="CountdownOverlay/CenterContainer" unique_id=372135923]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_utbpp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="EndGamePopup/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="EndGamePopup/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="ResetPuzzle" to="." method="_on_reset_puzzle_pressed"]
+[connection signal="pressed" from="shuffle" to="." method="_on_shuffle_pressed"]
+[connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="prevPuzzle" to="." method="_on_prev_puzzle_pressed"]
+[connection signal="pressed" from="nextPuzzle" to="." method="_on_next_puzzle_pressed"]

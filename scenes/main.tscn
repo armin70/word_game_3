@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://di52cp1yfwlvt"]
+
+[ext_resource type="Script" uid="uid://fwtwrcpkrej7" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cy50wck4j8bek" path="res://scenes/game_scene.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://d3li5d81edtgk" path="res://scenes/multiplayer.tscn" id="2_sugp2"]
+
+[node name="main" type="Control" unique_id=1260012901]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sugp2")
+
+[node name="gameContainer" type="AspectRatioContainer" parent="." unique_id=2090500827]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="multiplayer" parent="gameContainer" unique_id=937290989 instance=ExtResource("2_sugp2")]
+layout_mode = 2
+
+[node name="game_scene" parent="gameContainer" unique_id=1975577975 instance=ExtResource("2_0wfyh")]
+layout_mode = 2
+
+[connection signal="resized" from="." to="." method="_on_resized"]
