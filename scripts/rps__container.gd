@@ -134,6 +134,7 @@ func get_debuff(type_name):
 	elif type_name == "Scissors":
 		targets = get_tree().get_nodes_in_group("Rock")
 	if targets:
+		print(targets ,"trget size:", targets.size())
 		debuff = targets.size()
 	else:
 		debuff = 0
@@ -144,6 +145,7 @@ func get_debuff(type_name):
 func bomb_planted(type_name):
 	var targets
 	targets = get_tree().get_nodes_in_group(type_name)
+	print("targets: ",targets)
 	targets[0].play_bomb_idle()
 
 func wait_to_finish_animation(targets):
